@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { SideBar } from "./components/SideBar";
 import { Content } from "./components/Content";
 import { api } from "./services/api";
@@ -26,19 +26,17 @@ interface MovieProps {
 
 export function App() {
   const [selectedGenreId, setSelectedGenreId] = useState(1);
-
   const [genres, setGenres] = useState<GenreResponseProps[]>([]);
-
   const [movies, setMovies] = useState<MovieProps[]>([]);
   const [selectedGenre, setSelectedGenre] = useState<GenreResponseProps>({} as GenreResponseProps);
 
-  useEffect(() => {
+  useMemo(() => {
     api.get<GenreResponseProps[]>("genres").then((response) => {
       setGenres(response.data);
     });
   }, []);
 
-  useEffect(() => {
+  useMemo(() => {
     api.get<MovieProps[]>(`movies/?Genre_id=${selectedGenreId}`).then((response) => {
       setMovies(response.data);
     });
