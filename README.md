@@ -28,7 +28,7 @@ Trás alguns benefícios quando utilizado em:
 
 Exemplo de aplicação:
 
-```
+```ts
 export const ProductItem = memo(ProductItemComponent, (prevProps, nextProps) => {
   return Object.is(prevProps.product, nextProps.product);
 });
@@ -49,7 +49,7 @@ Usado para igualdade referencial de funções. Utilizado geralmente quando se te
 
 Também deve-se transformar a função em uma constante:
 
-```
+```ts
 const addToWishlist = useCallback(async (id: number) => {
   console.log(id);
 }, []);
